@@ -2,7 +2,7 @@
   <div>
     <Header />
     <main>
-      <HeroSection />
+      <GuideSection />
       <EpisodeList />
     </main>
     <AudioPlayer />
@@ -11,7 +11,7 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import HeroSection from '@/components/HeroSection.vue'
+import GuideSection from '@/components/GuideSection.vue'
 import EpisodeList from '@/components/EpisodeList.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 </script>
