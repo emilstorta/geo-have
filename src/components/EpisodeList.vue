@@ -4,9 +4,9 @@
         <h2 class="text-xl font-bold">EPISODER</h2>
         <div class="flex">
           <!-- Flag icons -->
-          <img src="/src/assets/flag-dk.svg" alt="Danish Flag" class="h-5 w-8 object-cover mx-1">
+          <img src="/src/assets/flag-dk.svg" alt="DK Flag" class="h-5 w-8 object-cover mx-1">
           <img src="/src/assets/flag-gb.svg" alt="UK Flag" class="h-5 w-8 object-cover mx-1">
-          <img src="/src/assets/flag-gm.svg" alt="UK Flag" class="h-5 w-8 object-cover mx-1">
+          <img src="/src/assets/flag-gm.svg" alt="DE Flag" class="h-5 w-8 object-cover mx-1">
           <!-- Add other flags as needed -->
         </div>
       </div>
@@ -14,13 +14,24 @@
         <!-- Iterate over the episodes array to generate list items -->
         <li v-for="episode in episodes" :key="episode.id" class="flex items-center py-3 px-4 border-b border-gray-200">
           <img :src="episode.image" alt="" class="h-10 w-10 rounded-full object-cover">
-          <img src="/src/assets/play-icon.svg" alt="Play" class="h-5 w-5 ml-3">
-          <div class="ml-4 flex-grow">
-            <span class="font-semibold">{{ episode.title }}</span>
-          </div>
-          <button class="ml-auto p-2">
-            <img src="/src/assets/heart.svg" alt="Like" class="h-5 w-5">
+          <button @click="toggleComponent">
+            <img src="/src/assets/play-icon.svg" alt="Play" class="h-5 w-5 ml-3">
           </button>
+          <div class="ml-4 flex-grow">
+            <span class="font-semibold" >{{ episode.title }}</span>
+          </div>
+          <button @click="toggleHeart(episode.id)" class="text-black hover:text-orange-500 transition-colors duration-300">
+                <svg v-if="!heartStates[episode.id]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                    stroke="currentColor" class="h-5 w-5 text-orange-500">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+            </button>
           <button class="p-2">
             <img src="/src/assets/more-icon.svg" alt="More" class="h-5 w-5">
           </button>
@@ -28,10 +39,12 @@
         <!-- Add the rest of your episodes here -->
       </ul>
     </section>
+    <AudioPlayer v-if="showComponent"  />
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted, reactive, } from 'vue';
+  import AudioPlayer from './AudioPlayer.vue';
   
   const episodes = ref([
     {
@@ -81,6 +94,27 @@
     },
     // other episodes...
   ]);
+
+const heartStates = reactive({});
+
+// Initialize heart states from local storage
+episodes.value.forEach((episode) => {
+  const storedIsFilled = localStorage.getItem(`heartIsFilled_${episode.id}`);
+  heartStates[episode.id] = storedIsFilled !== null ? JSON.parse(storedIsFilled) : false;
+});
+
+const toggleHeart = (episodeId) => {
+  heartStates[episodeId] = !heartStates[episodeId];
+  // Save to local storage
+  localStorage.setItem(`heartIsFilled_${episodeId}`, JSON.stringify(heartStates[episodeId]));
+};
+
+const showComponent = ref(false);
+
+const toggleComponent = () => {
+  showComponent.value = !showComponent.value;
+};
+
   </script>
   
   <style scoped>

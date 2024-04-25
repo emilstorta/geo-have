@@ -2,8 +2,8 @@
     <!-- Container -->
     <div class="fixed  bottom-0 left-0 right-0 bg-neutral-800">
         <!-- Title + Heart -->
-        <div class="flex items-center justify-between mx-6 mt-6 mr-6">
-            <h1 class="song-title text-xl text-white">Currently playing</h1>
+        <div class="flex items-center justify-between mx-6 mt-6 mr-6" >
+            <h1 class="text-xl text-white">Currently playing</h1>
             <button @click="toggleHeart" class="text-gray-500 hover:text-orange-500 transition-colors duration-300">
                 <svg v-if="!isFilled" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" class="h-6 w-6">
@@ -64,7 +64,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineProps} from 'vue';
+
+
+
+  const props = defineProps({
+    episodes: Array, // Receive the prop for episodes
+  });
 
 const isFilled = ref(false);
 
@@ -80,12 +86,7 @@ const toggleHeart = () => {
   localStorage.setItem('heartIsFilled', JSON.stringify(isFilled.value));
 };
 
-// Clear local storage on component unmount (optional)
-//onMounted(() => {
-//  window.addEventListener('beforeunload', () => {
-//    localStorage.removeItem('heartIsFilled');
-//  });
-//});
+
 //Pause play
 const isPlaying = ref(false);
 
