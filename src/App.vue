@@ -5,7 +5,7 @@
       <GuideSection />
       <EpisodeList />
     </main>
-    <AudioPlayer />
+    <!-- <AudioPlayer /> -->
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import Header from '@/components/Header.vue'
 import GuideSection from '@/components/GuideSection.vue'
 import EpisodeList from '@/components/EpisodeList.vue'
-import AudioPlayer from '@/components/AudioPlayer.vue'
+/* import AudioPlayer from '@/components/AudioPlayer.vue' */
 </script>
 
 <style scoped>
