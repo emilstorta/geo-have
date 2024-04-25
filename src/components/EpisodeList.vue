@@ -14,7 +14,7 @@
         <!-- Iterate over the episodes array to generate list items -->
         <li v-for="episode in episodes" :key="episode.id" class="flex items-center py-3 px-4 border-b border-gray-200">
           <img :src="episode.image" alt="" class="h-10 w-10 rounded-full object-cover">
-          <button @click="toggleComponent">
+          <button @click="playEpisode(episode.title)">
             <img src="/src/assets/play-icon.svg" alt="Play" class="h-5 w-5 ml-3">
           </button>
           <div class="ml-4 flex-grow">
@@ -39,7 +39,7 @@
         <!-- Add the rest of your episodes here -->
       </ul>
     </section>
-    <AudioPlayer v-if="showComponent"  />
+    <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle"  />
   </template>
   
   <script setup>
@@ -109,11 +109,16 @@ const toggleHeart = (episodeId) => {
   localStorage.setItem(`heartIsFilled_${episodeId}`, JSON.stringify(heartStates[episodeId]));
 };
 
-const showComponent = ref(false);
+  const showComponent = ref(false);
+  const currentEpisodeTitle = ref('');
 
-const toggleComponent = () => {
-  showComponent.value = !showComponent.value;
+  const playEpisode = (title) => {
+  currentEpisodeTitle.value = title;
+  showComponent.value = true;
 };
+//const toggleComponent = () => {
+//  showComponent.value = !showComponent.value;
+//};
 
   </script>
   
