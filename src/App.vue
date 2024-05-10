@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="min-h-screen">
     <Header />
-    <main>
+    <main class="w-full max-w-md mx-auto">
       <GuideSection />
       <EpisodeList />
     </main>
