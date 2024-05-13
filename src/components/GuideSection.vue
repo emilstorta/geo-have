@@ -7,39 +7,48 @@
         <!-- Swiper slide for Guide card 1 -->
         <swiper-slide style="width: 135px;">
           <div class="guide-card flex flex-col items-center space-y-3 bg-white rounded-lg p-3 shadow-lg relative" style="height: 210px;">
-            <div class="circle circle1 bg-red-200"></div> 
-            <div class="circle circle2 bg-red-200"></div> 
-            <div class="circle circle3 bg-red-200"></div> 
+            <div class="circle circle1 bg-red-200"></div>
+            <div class="circle circle2 bg-red-200"></div>
+            <div class="circle circle3 bg-red-200"></div>
             <span class="text-lg font-semibold text-center">Start din <br> tur ved at afspille lydfilerne</span>
-            <img src="@/assets/down-arrow.svg" alt="Down" class="h-8 w-8 mt-4" />
+            <div class="arrow-container">
+              <div class="arrow-shaft bg-red-200"></div>
+              <div class="arrow-head arrow-red"></div>
+            </div>
           </div>
         </swiper-slide>
         <!-- Swiper slide for Guide card 2 -->
         <swiper-slide style="width: 135px;">
           <div class="guide-card flex flex-col items-center space-y-3 bg-white rounded-lg p-3 shadow-lg relative" style="height: 210px;">
-            <div class="circle circle1 bg-yellow-200"></div> 
-            <div class="circle circle2 bg-yellow-200"></div> 
-            <div class="circle circle3 bg-yellow-200"></div> 
+            <div class="circle circle1 bg-yellow-200"></div>
+            <div class="circle circle2 bg-yellow-200"></div>
+            <div class="circle circle3 bg-yellow-200"></div>
             <span class="text-lg font-semibold text-center">Lyt med på turen, og <br> følg hans anvisninger</span>
-            <img src="@/assets/down-arrow.svg" alt="Down" class="h-8 w-8 mt-4" />
+            <div class="arrow-container">
+              <div class="arrow-shaft bg-yellow-200"></div>
+              <div class="arrow-head arrow-yellow"></div>
+            </div>
           </div>
         </swiper-slide>
         <!-- Swiper slide for Guide card 3 -->
         <swiper-slide style="width: 135px;">
           <div class="guide-card flex flex-col items-center space-y-3 bg-white rounded-lg p-3 shadow-lg relative" style="height: 210px;">
-            <div class="circle circle1 bg-orange-200"></div> 
-            <div class="circle circle2 bg-orange-200"></div> 
-            <div class="circle circle3 bg-orange-200"></div> 
+            <div class="circle circle1 bg-orange-200"></div>
+            <div class="circle circle2 bg-orange-200"></div>
+            <div class="circle circle3 bg-orange-200"></div>
             <span class="text-lg font-semibold text-center">På ruten er der flere poster, som kan scannes</span>
-            <img src="@/assets/down-arrow.svg" alt="Down" class="h-8 w-8 mt-4" />
+            <div class="arrow-container">
+              <div class="arrow-shaft bg-orange-200"></div>
+              <div class="arrow-head arrow-orange"></div>
+            </div>
           </div>
         </swiper-slide>
         <!-- Swiper slide for Guide card 4 -->
         <swiper-slide style="width: 135px;">
           <div class="guide-card flex flex-col items-center space-y-3 bg-white rounded-lg p-3 shadow-lg relative" style="height: 210px;">
-            <div class="circle circle1 bg-blue-200"></div> 
-            <div class="circle circle2 bg-blue-200"></div> 
-            <div class="circle circle3 bg-blue-200"></div> 
+            <div class="circle circle1 bg-blue-200"></div>
+            <div class="circle circle2 bg-blue-200"></div>
+            <div class="circle circle3 bg-blue-200"></div>
             <span class="text-xl font-extrabold text-center">Nyd din <br> tur rundt <br> i haven</span>
           </div>
         </swiper-slide>
@@ -68,47 +77,83 @@ import 'swiper/css/pagination';
 }
 
 .circle1 {
-  top: -1rem; /* Adjusted */
-  left: -1rem; /* Adjusted */
-  width: 3rem; /* Adjusted */
-  height: 3rem; /* Adjusted */
+  top: -1rem;
+  left: -1rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .circle2 {
-  top: 2rem; /* Adjusted */
-  left: 88%; /* Kept as percentage for positioning */
-  width: 6rem; /* Adjusted */
-  height: 6rem; /* Adjusted */
+  top: 2rem;
+  left: 88%;
+  width: 6rem;
+  height: 6rem;
 }
 
 .circle3 {
-  top: 65%; /* Kept as percentage for positioning */
-  left: -4rem; /* Adjusted */
-  width: 7rem; /* Adjusted */
-  height: 7rem; /* Adjusted */
+  top: 65%;
+  left: -4rem;
+  width: 7rem;
+  height: 7rem;
+}
+
+/* Arrow Styles */
+.arrow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem; 
+}
+
+.arrow-shaft {
+  width: 0.4rem; 
+  height: 2rem; 
+}
+
+.arrow-head {
+  width: 0;
+  height: 0;
+  border-left: 0.6rem solid transparent; 
+  border-right: 0.6rem solid transparent; 
+  border-top: 0.8rem solid; 
+  margin-top: -0.2rem; 
+}
+
+.arrow-red {
+  border-top-color: #fecaca; /* Tailwind bg-red-200 */
+}
+
+.arrow-yellow {
+  border-top-color: #fef08a; /* Tailwind bg-yellow-200 */
+}
+
+.arrow-orange {
+  border-top-color: #fed7aa; /* Tailwind bg-orange-200 */
+}
+
+.arrow-blue {
+  border-top-color: #bfdbfe; /* Tailwind bg-blue-200 */
 }
 
 .scrollbar-hide {
-  /* Hide scrollbar but allow scrolling */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 /* Additional Responsive Spacing */
 @media (min-width: 768px) {
   .relative.z-10 {
-    margin-top: -4rem; /* Less negative margin as the resolution increases */
+    margin-top: -4rem;
   }
 }
 
 @media (min-width: 1024px) {
   .relative.z-10 {
-    margin-top: -1rem; /* Even less negative, preventing overlap */
+    margin-top: -1rem;
   }
 }
 </style>
-
