@@ -1,5 +1,6 @@
 <template>
-    <section class="mt-4 bg-white">
+  <div id="listWrapper">
+  <section class="mt-4 bg-white overflow-y-auto">
       <div class="flex items-center justify-between px-4 mb-2">
         <h2 class="text-xl font-bold">EPISODER</h2>
         <div class="flex">
@@ -38,8 +39,9 @@
         </li>
         <!-- Add the rest of your episodes here -->
       </ul>
+      <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle"  />
     </section>
-    <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle"  />
+  </div>
   </template>
   
   <script setup>
@@ -115,6 +117,8 @@ const toggleHeart = (episodeId) => {
   const playEpisode = (title) => {
   currentEpisodeTitle.value = title;
   showComponent.value = true;
+  const myDiv = document.getElementById("listWrapper");
+  myDiv.style.height = "850px"; // Set the desired height in pixels
 };
 //const toggleComponent = () => {
 //  showComponent.value = !showComponent.value;
@@ -124,5 +128,6 @@ const toggleHeart = (episodeId) => {
   
   <style scoped>
   /* Tailwind utility classes are preferred for styling */
+  
   </style>
   
