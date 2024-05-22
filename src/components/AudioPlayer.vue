@@ -24,7 +24,7 @@
         <!-- Time Information -->
         <div class="flex justify-between mt-2 mx-6 mr-6 text-sm text-white">
             <span class="font-light">1:57</span>
-            <span class="font-light"    >3:53</span>
+            <span class="font-light">3:53</span>
         </div>
         <!-- Control buttons -->
         <div class="mt-2 mx-6 mr-6 mb-6 flex justify-center ">

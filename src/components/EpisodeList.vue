@@ -47,55 +47,85 @@
   <script setup>
   import { ref, onMounted, reactive, } from 'vue';
   import AudioPlayer from './AudioPlayer.vue';
+  import {
+    collection,
+    getDocs,
+    query, orderBy
+  } from 'firebase/firestore';
+  import { db } from '@/firebase/init.js';
+
+  // Firebase refs
+
+  const episodeListRef = collection(db, 'Episodes')
+  const episodeListQuery = query(episodeListRef, orderBy("sortingNumber", "asc"));
+
   
   const episodes = ref([
-    {
-      id: 1,
-      title: 'Introduktion til haven',
-      image: '/src/assets/episode1.jpg',
-    },
-    {
-      id: 2,
-      title: 'Drageånden i Kina',
-      image: '/src/assets/episode2.jpg',
-    },
-    {
-      id: 3,
-      title: 'Japans skønhed',
-      image: '/src/assets/episode3.jpg',
-    },
-    {
-      id: 4,
-      title: 'Europas Hemmeligheder',
-      image: '/src/assets/episode4.jpg',
-    },
-    {
-      id: 5,
-      title: 'Nordamerikas Vilde Hjerte',
-      image: '/src/assets/episode5.jpg',
-    },
-    {
-      id: 6,
-      title: 'Udforskning af Dyrehaven',
-      image: '/src/assets/episode6.jpg',
-    },
-    {
-      id: 7,
-      title: 'Sydamerikas Fortællinger',
-      image: '/src/assets/episode7.jpg',
-    },
-    {
-      id: 8,
-      title: 'Kolding i Miniatur',
-      image: '/src/assets/episode8.jpg',
-    },
-    {
-      id: 9,
-      title: 'Rosens Rige',
-      image: '/src/assets/episode9.jpg',
-    },
+    //{
+    //  id: 1,
+    //  title: 'Introduktion til haven',
+    //  image: '/src/assets/episode1.jpg',
+    //},
+    //{
+    //  id: 2,
+    //  title: 'Drageånden i Kina',
+    //  image: '/src/assets/episode2.jpg',
+    //},
+    //{
+    //  id: 3,
+    //  title: 'Japans skønhed',
+    //  image: '/src/assets/episode3.jpg',
+    //},
+    //{
+    //  id: 4,
+    //  title: 'Europas Hemmeligheder',
+    //  image: '/src/assets/episode4.jpg',
+    //},
+    //{
+    //  id: 5,
+    //  title: 'Nordamerikas Vilde Hjerte',
+    //  image: '/src/assets/episode5.jpg',
+    //},
+    //{
+    //  id: 6,
+    //  title: 'Udforskning af Dyrehaven',
+    //  image: '/src/assets/episode6.jpg',
+    //},
+    //{
+    //  id: 7,
+    //  title: 'Sydamerikas Fortællinger',
+    //  image: '/src/assets/episode7.jpg',
+    //},
+    //{
+    //  id: 8,
+    //  title: 'Kolding i Miniatur',
+    //  image: '/src/assets/episode8.jpg',
+    //},
+    //{
+    //  id: 9,
+    //  title: 'Rosens Rige',
+    //  image: '/src/assets/episode9.jpg',
+    //},
     // other episodes...
   ]);
+
+  // Get episodes
+  onMounted(async() => {
+    const querySnapshot = await getDocs(episodeListQuery)
+    let listEpisodes =[]
+    querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data())
+      const episode = {
+        id: doc.id,
+        title: doc.data().Name,
+        image: doc.data().imgURL,
+        audio: doc.data().audioURL
+      }
+    listEpisodes.push(episode)
+    })
+    episodes.value = listEpisodes
+  });
 
 const heartStates = reactive({});
 
