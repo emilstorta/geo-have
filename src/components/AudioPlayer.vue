@@ -28,7 +28,7 @@
         </div>
         <!-- Control buttons -->
         <div class="mt-2 mx-6 mr-6 mb-6 flex justify-center ">
-            <!-- Previous -->
+           <!-- Previous -->
             <button class="previous">
                 <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 12 16">
@@ -59,7 +59,7 @@
                     </path>
                 </svg>
             </button>
-        </div>
+       </div> 
     </div>
 </template>
 

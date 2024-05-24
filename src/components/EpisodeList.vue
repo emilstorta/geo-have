@@ -13,7 +13,7 @@
       </div>
       <ul>
         <!-- Iterate over the episodes array to generate list items -->
-        <li v-for="episode in episodes" :key="episode.id" class="flex items-center py-3 px-4 border-b border-gray-200">
+        <li v-for="episode in episodes" :key="episode.ids" class="flex items-center py-3 px-4 border-b border-gray-200">
           <img :src="episode.image" alt="" class="h-10 w-10 rounded-full object-cover">
           <button @click="playEpisode(episode.title)">
             <img src="/src/assets/play-icon.svg" alt="Play" class="h-5 w-5 ml-3">
@@ -37,15 +37,14 @@
             <img src="/src/assets/more-icon.svg" alt="More" class="h-5 w-5">
           </button>
         </li>
-        <!-- Add the rest of your episodes here -->
       </ul>
-      <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle"  />
+      <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle" />
     </section>
   </div>
   </template>
   
   <script setup>
-  import { ref, onMounted, reactive, } from 'vue';
+  import { ref, onMounted, reactive } from 'vue';
   import AudioPlayer from './AudioPlayer.vue';
   import {
     collection,
@@ -53,12 +52,14 @@
     query, orderBy
   } from 'firebase/firestore';
   import { db } from '@/firebase/init.js';
-
-  // Firebase refs
-
+  
+  
+  
+  // Episodes collection
   const episodeListRef = collection(db, 'Episodes')
   const episodeListQuery = query(episodeListRef, orderBy("sortingNumber", "asc"));
 
+ 
   
   const episodes = ref([
     //{
@@ -115,7 +116,7 @@
     let listEpisodes =[]
     querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data())
+      // console.log(doc.id, " => ", doc.data())
       const episode = {
         id: doc.id,
         title: doc.data().Name,
@@ -141,23 +142,43 @@ const toggleHeart = (episodeId) => {
   localStorage.setItem(`heartIsFilled_${episodeId}`, JSON.stringify(heartStates[episodeId]));
 };
 
+
+// Set state of audioplayer to hidden
   const showComponent = ref(false);
+
+// Episode title in audioplayer set to be empty  
   const currentEpisodeTitle = ref('');
 
+
+  // Shows the child component AudioPlayer
   const playEpisode = (title) => {
-  currentEpisodeTitle.value = title;
-  showComponent.value = true;
-  const myDiv = document.getElementById("listWrapper");
-  myDiv.style.height = "850px"; // Set the desired height in pixels
-};
-//const toggleComponent = () => {
-//  showComponent.value = !showComponent.value;
-//};
+// Find the episode with the matching title
+  const selectedEpisode = episodes.value.find((episode) => episode.title === title);
+    if (selectedEpisode) {
+    // Retrieve the audio URL
+    const audioUrl = selectedEpisode.audio;
+
+    // Create an <audio> element
+    const audioElement = new Audio(audioUrl);
+
+    // Play the audio
+    audioElement.play();
+  } else {
+    console.error(`Episode "${title}" not found.`);
+  }
+
+  // When play is pressed, sends episode title to child component af a prop
+    currentEpisodeTitle.value = title;
+  // Shows the child component AudioPlayer
+    showComponent.value = true;
+   // Makes the listWrapper bigger to fit with audioplayer
+  const myDiv = document.getElementById("listWrapper")
+  myDiv.style.height = "850px"; 
+  };
 
   </script>
   
   <style scoped>
-  /* Tailwind utility classes are preferred for styling */
   
   </style>
   
