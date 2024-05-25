@@ -66,13 +66,11 @@ import { ref, onMounted } from 'vue';
 
 
   const props = defineProps({
-      episodeTitle: String,
-      isPlaying:Boolean
+    episodeTitle: String,
   });
 
 
 
-// Heart controls
 const isFilled = ref(false);
 
 // Load initial state from local storage

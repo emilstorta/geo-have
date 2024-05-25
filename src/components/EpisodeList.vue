@@ -39,7 +39,7 @@
           </button>
         </li>
       </ul>
-      <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle" :isPlaying="audioIsPlaying" />
+      <AudioPlayer v-if="showComponent" :episodeTitle="currentEpisodeTitle" />
     </section>
   </div>
   </template>
@@ -51,8 +51,7 @@
   import {
     collection,
     getDocs,
-    query,
-    orderBy
+    query, orderBy
   } from 'firebase/firestore';
   import { db } from '@/firebase/init.js';
   
@@ -82,14 +81,66 @@ const idToKeyMap = {
   '8RQf8L7M4aVCI88DDiDN': 'episode9'
 };
  
+<<<<<<< HEAD
   // Initialize the episodes array with predefined episodes for mapping translations
   const episodes = ref([]);
+=======
+  
+  const episodes = ref([
+    //{
+    //  id: 1,
+    //  title: 'Introduktion til haven',
+    //  image: '/src/assets/episode1.jpg',
+    //},
+    //{
+    //  id: 2,
+    //  title: 'Drageånden i Kina',
+    //  image: '/src/assets/episode2.jpg',
+    //},
+    //{
+    //  id: 3,
+    //  title: 'Japans skønhed',
+    //  image: '/src/assets/episode3.jpg',
+    //},
+    //{
+    //  id: 4,
+    //  title: 'Europas Hemmeligheder',
+    //  image: '/src/assets/episode4.jpg',
+    //},
+    //{
+    //  id: 5,
+    //  title: 'Nordamerikas Vilde Hjerte',
+    //  image: '/src/assets/episode5.jpg',
+    //},
+    //{
+    //  id: 6,
+    //  title: 'Udforskning af Dyrehaven',
+    //  image: '/src/assets/episode6.jpg',
+    //},
+    //{
+    //  id: 7,
+    //  title: 'Sydamerikas Fortællinger',
+    //  image: '/src/assets/episode7.jpg',
+    //},
+    //{
+    //  id: 8,
+    //  title: 'Kolding i Miniatur',
+    //  image: '/src/assets/episode8.jpg',
+    //},
+    //{
+    //  id: 9,
+    //  title: 'Rosens Rige',
+    //  image: '/src/assets/episode9.jpg',
+    //},
+    // other episodes...
+  ]);
+>>>>>>> parent of fc75d31 (Only plays one audio at a time)
 
 
   // Fetch episodes from Firestore and update the episodes array
   onMounted(async() => {
     const querySnapshot = await getDocs(episodeListQuery)
-    const listEpisodes =[]
+    let listEpisodes =[]
     querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data())
@@ -105,52 +156,7 @@ const idToKeyMap = {
     episodes.value = listEpisodes
   });
 
-
-// Set state of audioplayer to hidden
-  const showComponent = ref(false);
-
-
-// Episode title in audioplayer set to be empty  
-  const currentEpisodeTitle = ref('');
-
-// Keep track of the currently playing episode
-  const currentPlayingEpisode = ref(null);
-  const audioIsPlaying = ref(false);
-  
-
-  const playEpisode = (title) => {
-// Find the episode with the matching title
-  const selectedEpisode = episodes.value.find((episode) => episode.title === title);
-    if (selectedEpisode) {
-    // Retrieve the audio URL
-    const audioUrl = selectedEpisode.audio;
-
-    // Create an <audio> element
-    const audioElement = new Audio(audioUrl);
-
-    // Pause the currently playing episode (if any)
-      if (currentPlayingEpisode.value) {
-        currentPlayingEpisode.value.pause();
-      }
-    
-    // Play the audio
-      audioElement.play();
-      audioIsPlaying.value = true;
-      currentPlayingEpisode.value = audioElement;
-  } else {
-    console.error(`Episode "${title}" not found.`);
-  }
-
-  // When play is pressed, sends episode title to child component af a prop
-    currentEpisodeTitle.value = title;
-  // Shows the child component AudioPlayer
-    showComponent.value = true;
-   // Makes the listWrapper height
-  const myDiv = document.getElementById("listWrapper")
-  myDiv.style.height = "850px"; 
-  };
-
-  const heartStates = reactive({});
+const heartStates = reactive({});
 
 // Initialize heart states from local storage
 episodes.value.forEach((episode) => {
@@ -164,6 +170,39 @@ const toggleHeart = (episodeId) => {
   localStorage.setItem(`heartIsFilled_${episodeId}`, JSON.stringify(heartStates[episodeId]));
 };
 
+
+// Set state of audioplayer to hidden
+  const showComponent = ref(false);
+
+// Episode title in audioplayer set to be empty  
+  const currentEpisodeTitle = ref('');
+
+
+  // Shows the child component AudioPlayer
+  const playEpisode = (title) => {
+// Find the episode with the matching title
+  const selectedEpisode = episodes.value.find((episode) => episode.title === title);
+    if (selectedEpisode) {
+    // Retrieve the audio URL
+    const audioUrl = selectedEpisode.audio;
+
+    // Create an <audio> element
+    const audioElement = new Audio(audioUrl);
+
+    // Play the audio
+    audioElement.play();
+  } else {
+    console.error(`Episode "${title}" not found.`);
+  }
+
+  // When play is pressed, sends episode title to child component af a prop
+    currentEpisodeTitle.value = title;
+  // Shows the child component AudioPlayer
+    showComponent.value = true;
+   // Makes the listWrapper bigger to fit with audioplayer
+  const myDiv = document.getElementById("listWrapper")
+  myDiv.style.height = "850px"; 
+  };
 
   </script>
   
