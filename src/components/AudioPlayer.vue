@@ -63,13 +63,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-
-
-  const props = defineProps({
-    episodeTitle: String,
-  });
-
-
+const props = defineProps({
+  episodeTitle: String,
+});
 
 const isFilled = ref(false);
 

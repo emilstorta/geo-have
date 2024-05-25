@@ -81,60 +81,8 @@ const idToKeyMap = {
   '8RQf8L7M4aVCI88DDiDN': 'episode9'
 };
  
-<<<<<<< HEAD
   // Initialize the episodes array with predefined episodes for mapping translations
   const episodes = ref([]);
-=======
-  
-  const episodes = ref([
-    //{
-    //  id: 1,
-    //  title: 'Introduktion til haven',
-    //  image: '/src/assets/episode1.jpg',
-    //},
-    //{
-    //  id: 2,
-    //  title: 'Drageånden i Kina',
-    //  image: '/src/assets/episode2.jpg',
-    //},
-    //{
-    //  id: 3,
-    //  title: 'Japans skønhed',
-    //  image: '/src/assets/episode3.jpg',
-    //},
-    //{
-    //  id: 4,
-    //  title: 'Europas Hemmeligheder',
-    //  image: '/src/assets/episode4.jpg',
-    //},
-    //{
-    //  id: 5,
-    //  title: 'Nordamerikas Vilde Hjerte',
-    //  image: '/src/assets/episode5.jpg',
-    //},
-    //{
-    //  id: 6,
-    //  title: 'Udforskning af Dyrehaven',
-    //  image: '/src/assets/episode6.jpg',
-    //},
-    //{
-    //  id: 7,
-    //  title: 'Sydamerikas Fortællinger',
-    //  image: '/src/assets/episode7.jpg',
-    //},
-    //{
-    //  id: 8,
-    //  title: 'Kolding i Miniatur',
-    //  image: '/src/assets/episode8.jpg',
-    //},
-    //{
-    //  id: 9,
-    //  title: 'Rosens Rige',
-    //  image: '/src/assets/episode9.jpg',
-    //},
-    // other episodes...
-  ]);
->>>>>>> parent of fc75d31 (Only plays one audio at a time)
 
 
   // Fetch episodes from Firestore and update the episodes array
@@ -179,9 +127,9 @@ const toggleHeart = (episodeId) => {
 
 
   // Shows the child component AudioPlayer
-  const playEpisode = (title) => {
+  const playEpisode = (id) => {
 // Find the episode with the matching title
-  const selectedEpisode = episodes.value.find((episode) => episode.title === title);
+  const selectedEpisode = episodes.value.find((episode) => episode.id === id);
     if (selectedEpisode) {
     // Retrieve the audio URL
     const audioUrl = selectedEpisode.audio;
@@ -192,11 +140,11 @@ const toggleHeart = (episodeId) => {
     // Play the audio
     audioElement.play();
   } else {
-    console.error(`Episode "${title}" not found.`);
+    console.error(`Episode "${id}" not found.`);
   }
 
   // When play is pressed, sends episode title to child component af a prop
-    currentEpisodeTitle.value = title;
+    currentEpisodeTitle.value = t(`titles.${idToKeyMap[id]}`);
   // Shows the child component AudioPlayer
     showComponent.value = true;
    // Makes the listWrapper bigger to fit with audioplayer
