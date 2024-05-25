@@ -1,3 +1,4 @@
+// src/i18n.js
 import { createI18n } from 'vue-i18n';
 
 const messages = {
@@ -5,6 +6,15 @@ const messages = {
     episodes: 'EPISODES',
     play: 'Play',
     more: 'More',
+    mainTitle: 'GEOGRAFISK HAVE',
+    episodeCount: '10 EPISODES',
+    guideTitle: 'Guide',
+    guides: {
+      guide1: 'Start your tour by playing the audio files',
+      guide2: 'Listen along the tour and follow his instructions',
+      guide3: 'Several checkpoints can be scanned',
+      guide4: 'Enjoy your tour in the garden'
+    },
     titles: {
       episode1: 'Introduction to the Garden',
       episode2: 'The Dragon Spirit in China',
@@ -21,6 +31,15 @@ const messages = {
     episodes: 'EPISODER',
     play: 'Spil',
     more: 'Mere',
+    mainTitle: 'GEOGRAFISK HAVE',
+    episodeCount: '10 EPISODER',
+    guideTitle: 'Vejledning',
+    guides: {
+      guide1: 'Start din tur ved at afspille lydfilerne',
+      guide2: 'Lyt med på turen, og følg hans anvisninger',
+      guide3: 'På ruten er der flere poster, som kan scannes',
+      guide4: 'Nyd din tur rundt i haven'
+    },
     titles: {
       episode1: 'Introduktion til haven',
       episode2: 'Drageånden i Kina',
@@ -37,6 +56,15 @@ const messages = {
     episodes: 'EPISODEN',
     play: 'Abspielen',
     more: 'Mehr',
+    mainTitle: 'GEOGRAFISK HAVE',
+    episodeCount: '10 EPISODEN',
+    guideTitle: 'Anleitung',
+    guides: {
+      guide1: 'Starten Sie die Tour mit den Audiodateien',
+      guide2: 'Hören und folgen Sie den Anweisungen',
+      guide3: 'Mehrere Orte sind zum Scannen vorhanden',
+      guide4: 'Genießen Sie die Tour im Garten'
+    },
     titles: {
       episode1: 'Einführung in den Garten',
       episode2: 'Der Drachengeist in China',

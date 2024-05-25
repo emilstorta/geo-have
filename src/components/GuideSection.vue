@@ -1,7 +1,7 @@
 <template>
   <div class="relative z-10 -mt-[12rem] md:-mt-[14rem]">
     <!-- Heading aligned with the start of the cards -->
-    <h2 class="text-xl font-semibold my-4 pl-4">Vejledning</h2>
+    <h2 class="text-xl font-semibold my-4 pl-4">{{ $t('guideTitle') }}</h2>
     <section class="px-4">
       <swiper :slides-per-view="'auto'" :space-between="10" :pagination="{ clickable: true }" class="mySwiper">
         <!-- Swiper slide for Guide card 1 -->
@@ -10,7 +10,7 @@
             <div class="circle circle1 bg-red-200"></div>
             <div class="circle circle2 bg-red-200"></div>
             <div class="circle circle3 bg-red-200"></div>
-            <span class="text-lg font-semibold text-center">Start din <br> tur ved at afspille lydfilerne</span>
+            <span class="text-lg font-semibold text-center">{{ $t('guides.guide1') }}</span>
             <div class="arrow-container">
               <div class="arrow-shaft bg-red-200"></div>
               <div class="arrow-head arrow-red"></div>
@@ -23,7 +23,7 @@
             <div class="circle circle1 bg-yellow-200"></div>
             <div class="circle circle2 bg-yellow-200"></div>
             <div class="circle circle3 bg-yellow-200"></div>
-            <span class="text-lg font-semibold text-center">Lyt med på turen, og <br> følg hans anvisninger</span>
+            <span class="text-lg font-semibold text-center">{{ $t('guides.guide2') }}</span>
             <div class="arrow-container">
               <div class="arrow-shaft bg-yellow-200"></div>
               <div class="arrow-head arrow-yellow"></div>
@@ -36,7 +36,7 @@
             <div class="circle circle1 bg-orange-200"></div>
             <div class="circle circle2 bg-orange-200"></div>
             <div class="circle circle3 bg-orange-200"></div>
-            <span class="text-lg font-semibold text-center">På ruten er der flere poster, som kan scannes</span>
+            <span class="text-lg font-semibold text-center">{{ $t('guides.guide3') }}</span>
             <div class="arrow-container">
               <div class="arrow-shaft bg-orange-200"></div>
               <div class="arrow-head arrow-orange"></div>
@@ -49,7 +49,7 @@
             <div class="circle circle1 bg-blue-200"></div>
             <div class="circle circle2 bg-blue-200"></div>
             <div class="circle circle3 bg-blue-200"></div>
-            <span class="text-xl font-extrabold text-center">Nyd din <br> tur rundt <br> i haven</span>
+            <span class="text-xl font-extrabold text-center">{{ $t('guides.guide4') }}</span>
           </div>
         </swiper-slide>
       </swiper>
