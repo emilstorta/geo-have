@@ -1,4 +1,3 @@
-// src/i18n.js
 import { createI18n } from 'vue-i18n';
 
 const messages = {
@@ -15,6 +14,7 @@ const messages = {
       guide3: 'Several checkpoints can be scanned',
       guide4: 'Enjoy your tour in the garden'
     },
+    howWasYourExperience: 'How was your experience?',
     titles: {
       episode1: 'Introduction to the Garden',
       episode2: 'The Dragon Spirit in China',
@@ -40,6 +40,7 @@ const messages = {
       guide3: 'På ruten er der flere poster, som kan scannes',
       guide4: 'Nyd din tur rundt i haven'
     },
+    howWasYourExperience: 'Hvordan var din oplevelse?',
     titles: {
       episode1: 'Introduktion til haven',
       episode2: 'Drageånden i Kina',
@@ -65,6 +66,7 @@ const messages = {
       guide3: 'Mehrere Orte sind zum Scannen vorhanden',
       guide4: 'Genießen Sie die Tour im Garten'
     },
+    howWasYourExperience: 'Wie war Ihre Erfahrung?',
     titles: {
       episode1: 'Einführung in den Garten',
       episode2: 'Der Drachengeist in China',
