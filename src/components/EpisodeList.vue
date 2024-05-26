@@ -124,11 +124,12 @@ const toggleHeart = (episodeId) => {
 
 // Episode title in audioplayer set to be empty  
   const currentEpisodeTitle = ref('');
+  const currentPlayingEpisode = ref(null);
 
 
   // Shows the child component AudioPlayer
   const playEpisode = (id) => {
-// Find the episode with the matching title
+  // Find the episode with the matching title
   const selectedEpisode = episodes.value.find((episode) => episode.id === id);
     if (selectedEpisode) {
     // Retrieve the audio URL
@@ -137,8 +138,13 @@ const toggleHeart = (episodeId) => {
     // Create an <audio> element
     const audioElement = new Audio(audioUrl);
 
+      if (currentPlayingEpisode.value) {
+        currentPlayingEpisode.value.pause();
+    }
+
     // Play the audio
-    audioElement.play();
+      audioElement.play();
+      currentPlayingEpisode.value = audioElement;
   } else {
     console.error(`Episode "${id}" not found.`);
   }
